@@ -1,0 +1,34 @@
+
+# SOV LOYALITY TRAITS
+
+leader_traits = {
+	SOV_loyalty_unknown = {
+
+		type = all
+		trait_type = personality_trait
+
+		new_commander_weight = {
+			factor = 0
+		}
+	}
+	
+	SOV_loyal = {
+
+		type = all
+		trait_type = personality_trait
+
+		new_commander_weight = {
+			factor = 0
+		}
+	}
+	
+	SOV_disloyal = {
+
+		type = all
+		trait_type = personality_trait
+
+		new_commander_weight = {
+			factor = 0
+		}
+	}
+}

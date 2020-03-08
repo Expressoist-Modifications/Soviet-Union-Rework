@@ -1,0 +1,70 @@
+SOV_the_great_purge = {
+
+	SOV_finish_the_purge = {
+
+		priority = 10
+
+		icon = generic_operation
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		days_mission_timeout = 250
+
+		fire_only_once = yes
+
+		activation = {
+			has_completed_focus = SOV_the_great_purge
+		}
+
+		visible = {
+			tag = SOV
+			has_completed_focus = SOV_the_great_purge
+		}
+
+		cancel_if_not_visible = yes
+
+		is_good = yes
+
+		timeout_effect = {
+		}
+	}
+	
+	SOV_get_intel = {
+
+		icon = generic_independence
+
+		cost = 0
+
+		ai_will_do = {
+			base = 200
+		}
+
+		days_remove = 5
+
+		remove_effect = {
+			random_army_leader = {
+				limit = {
+					has_trait = SOV_loyalty_unknown
+				}
+				if {
+					limit = {
+						has_unit_leader_flag = loyal
+					}
+					add_unit_leader_trait = SOV_loyal
+				}
+				if {
+					limit = {
+						has_unit_leader_flag = disloyal
+					}
+					add_unit_leader_trait = SOV_disloyal
+				}
+				remove_unit_leader_trait = SOV_loyalty_unknown
+			}
+		}
+
+	}
+	
+	
+}

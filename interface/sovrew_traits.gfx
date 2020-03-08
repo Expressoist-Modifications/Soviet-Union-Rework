@@ -1,0 +1,18 @@
+spriteTypes = {
+
+	spriteType = {
+		name = "GFX_trait_SOV_loyalty_unknown"
+		texturefile = "gfx/interface/traits/trait_SOV_loyalty_unknown.dds"
+	}
+	
+	spriteType = {
+		name = "GFX_trait_SOV_loyal"
+		texturefile = "gfx/interface/traits/trait_SOV_loyal.dds"
+	}
+	
+	spriteType = {
+		name = "GFX_trait_SOV_disloyal"
+		texturefile = "gfx/interface/traits/trait_SOV_disloyal.dds"
+	}
+	
+}

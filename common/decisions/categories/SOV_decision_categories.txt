@@ -1,0 +1,14 @@
+SOV_the_great_purge = {
+	
+	allowed = {
+		original_tag = SOV
+	}
+
+	available = {
+		always = yes
+	}
+
+	visible = {
+		always = yes
+	}
+}

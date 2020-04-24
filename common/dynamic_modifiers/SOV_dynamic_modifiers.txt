@@ -1,0 +1,35 @@
+SOV_active_purge = {
+	icon = GFX_idea_officers_purged
+	
+	enable = { always = yes }
+	remove_trigger = { 
+		NOT = { 
+			has_country_flag = active_purge
+		}
+	}
+	
+	political_power_factor = 0.20
+	political_power_gain = SOV.purge_pp_modifier
+}
+
+SOV_fear_of_a_counter_revolution_dynamic = {
+	icon = GFX_idea_trotskyite_plot
+
+	enable = { always = yes }
+	remove_trigger = {
+		has_country_flag = successful_purge
+	}
+	
+	stability_factor = SOV.purge_stability_modifier?-0.2
+}
+
+SOV_purge_some_officers = {
+	icon = GFX_idea_trotskyite_plot_purged
+
+	enable = { always = yes }
+	remove_trigger = {
+		NOT = { has_country_flag = disloyal_officers_in_army }
+	}
+	
+	stability_factor = SOV.purge_stability_modifier?-0.2
+}

@@ -1,3 +1,7 @@
 ﻿l_english:
  SOV_loyalty_unknown:0 "Loyalty Unknown"
  SOV_loyalty_unknown_desc:0 "The loyalty of this commander is unknown. Further intelligence is needed to determine if this person can be trusted..."
+ SOV_disloyal:0 "Counter-Revolutionary"
+ SOV_disloyal_desc:0 "This commander actively tries to undermine the achievements of the Soviet Union. We should take measures against his treasonous behavior."
+ SOV_loyal:0 "Loyal to the Revolution"
+ SOV_loyal_desc:0 "This commander has proven himself to be loyal to the Soviet Union. He will lead our army into war with total determination."

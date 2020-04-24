@@ -31,4 +31,14 @@ leader_traits = {
 			factor = 0
 		}
 	}
+
+	SOV_corrective_work = {
+
+		type = all
+		trait_type = personality_trait
+
+		new_commander_weight = {
+			factor = 0
+		}
+	}
 }

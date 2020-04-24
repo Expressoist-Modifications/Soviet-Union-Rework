@@ -1,70 +1,662 @@
-SOV_the_great_purge = {
+SOV_decision_great_purge = {
 
 	SOV_finish_the_purge = {
 
 		priority = 10
 
-		icon = generic_operation
+		icon = generic_ignite_civil_war
 
 		available = {
 			hidden_trigger = { always = no }
 		}
 
-		days_mission_timeout = 250
+		days_mission_timeout = 360
 
 		fire_only_once = yes
 
 		activation = {
-			has_completed_focus = SOV_the_great_purge
+			has_completed_focus = SOV_great_purge
 		}
 
 		visible = {
 			tag = SOV
-			has_completed_focus = SOV_the_great_purge
+			has_completed_focus = SOV_great_purge
 		}
 
 		cancel_if_not_visible = yes
-
-		is_good = yes
+		
+		is_good = no
 
 		timeout_effect = {
+			custom_effect_tooltip = SOV_finish_the_purge_tt
+			hidden_effect = {
+				clr_country_flag = active_purge
+				SOV_recalc_coup_chance = yes
+				random_list = {
+					SOV.coup_chance = {
+						country_event = {
+							id = soviet_purge.8
+						}
+					}
+					SOV.no_coup_chance = {
+						country_event = {
+							id = soviet_purge.10
+						}
+					}
+				}
+			}
 		}
 	}
 	
-	SOV_get_intel = {
+	SOV_preemptive_assassination = {
 
-		icon = generic_independence
+		icon = generic_prepare_civil_war
 
-		cost = 0
+		cost = 10
+		
+		days_remove = 30
+		days_re_enable = 30
+		
+		cancel_if_not_visible = yes
 
 		ai_will_do = {
 			base = 200
 		}
-
-		days_remove = 5
-
+		
+		available = {
+			any_unit_leader = {	
+				has_trait = SOV_loyalty_unknown
+				skill < 4
+			}
+		}
+	
 		remove_effect = {
-			random_army_leader = {
-				limit = {
-					has_trait = SOV_loyalty_unknown
-				}
-				if {
+			custom_effect_tooltip = SOV_preemptive_assassination_tt
+			hidden_effect = {
+				random_unit_leader = {
 					limit = {
-						has_unit_leader_flag = loyal
+						has_trait = SOV_loyalty_unknown
+						skill < 4
 					}
-					add_unit_leader_trait = SOV_loyal
-				}
-				if {
-					limit = {
-						has_unit_leader_flag = disloyal
+					if = {
+						limit = {
+							has_unit_leader_flag = loyal
+						}
+						unit_leader_event = { id = soviet_purge.1 }
+						else = {
+							unit_leader_event = { id = soviet_purge.2 }
+						}
 					}
-					add_unit_leader_trait = SOV_disloyal
+					SOV_execute_unit_leader = yes
 				}
-				remove_unit_leader_trait = SOV_loyalty_unknown
 			}
 		}
 
 	}
 	
+	SOV_ensure_loyalty_in_the_high_command = {
+
+		icon = generic_army_support
+
+		cost = 30
+		
+		days_remove = 30
+		days_re_enable = 30
+
+		ai_will_do = {
+			base = 200
+		}
+		
+		available = {
+			any_unit_leader = {	
+				has_trait = SOV_loyalty_unknown
+				skill > 3
+			}
+		}
 	
+		remove_effect = {
+			custom_effect_tooltip = SOV_secure_leader_loyalty_tt
+			hidden_effect = {
+				random_unit_leader = {
+					limit = {
+						has_trait = SOV_loyalty_unknown
+						has_unit_leader_flag = disloyal
+						skill > 3
+					}
+					SOV_sway_loyalty = yes
+				}
+			}
+		}
+
+	}
+	
+	SOV_secure_leader_loyalty = {
+
+		icon = generic_army_support
+
+		cost = 20
+		days_remove = 30
+		days_re_enable = 30
+
+		ai_will_do = {
+			base = 200
+		}
+		
+		available = {
+			any_unit_leader = {	
+				has_trait = SOV_loyalty_unknown
+				skill < 4
+			}
+		}
+	
+		remove_effect = {
+			custom_effect_tooltip = SOV_secure_leader_loyalty_tt
+			hidden_effect = {
+				random_unit_leader = {
+					limit = {
+						has_trait = SOV_loyalty_unknown
+						has_unit_leader_flag = disloyal
+						skill < 4
+					}
+					SOV_sway_loyalty = yes
+				}
+			}
+		}
+
+	}
+	
+	SOV_hold_a_public_trial = {
+
+		icon = generic_independence
+
+		cost = SOV.trial_cost
+		days_remove = 0
+		
+		available = {
+			AND = {
+				check_variable = {
+					var = SOV.trial_leader_count
+					value = 0
+					compare = greater_than
+				}
+				any_unit_leader = {	
+					has_trait = SOV_disloyal
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 200
+		}
+
+		complete_effect = {
+			country_event = {
+				id = soviet_purge.6
+			}
+			set_temp_variable = { temp_add_days = SOV.trial_leader_count }
+			multiply_temp_variable = { temp_add_days = 30 }
+			add_days_mission_timeout = {
+				mission = SOV_finish_the_purge
+				days = temp_add_days
+			}
+		}
+
+	}
+	
+	SOV_get_intelligence_on_commanders = {
+
+		icon = eng_trade_unions_support
+
+		cost = 10
+		days_remove = 20
+
+		ai_will_do = {
+			base = 200
+		}
+		
+		available = {
+			any_unit_leader = {	
+				has_trait = SOV_loyalty_unknown
+			}
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = SOV_reveal_leader_loyalty_tt
+			hidden_effect = {
+				random_unit_leader = {	
+					limit = {
+						has_trait = SOV_loyalty_unknown
+					}
+					if = {
+						limit = {
+							skill > 3
+							has_unit_leader_flag = disloyal
+						}
+						unit_leader_event = { id = soviet_purge.3 }
+						
+						else = {
+							SOV_reveal_unit_leader = yes
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+SOV_decision_trotskyite_plot = {
+
+	SOV_found_the_fourth_international = {
+
+		priority = 10
+
+		icon = generic_nationalism
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		days_mission_timeout = 360
+
+		fire_only_once = yes
+
+		activation = {
+			has_completed_focus = SOV_great_purge
+		}
+
+		visible = {
+			tag = SOV
+		}
+
+		cancel_if_not_visible = yes
+		
+		is_good = no
+
+		timeout_effect = {
+			custom_effect_tooltip = SOV_coup_modifier_add_20_tt
+			add_to_variable = { SOV.coup_modifier = 20 }
+			SOV_recalc_coup_chance = yes
+			news_event = {
+				id = soviet_purge.12
+			}
+		}
+	}
+	
+	SOV_sway_leader_loyalty = {
+
+		icon = generic_army_support
+
+		cost = 10
+		
+		days_remove = 60
+		days_re_enable = 30
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+		
+		visible = {
+			always = no
+		}
+		
+		activation = {
+			always = no
+		}
+	
+		remove_effect = {
+			custom_effect_tooltip = SOV_sway_leader_loyalty_tt
+			hidden_effect = {
+				random_unit_leader = {
+					limit = {
+						has_trait = SOV_loyalty_unknown
+						has_unit_leader_flag = loyal
+						skill < 4
+					}
+					SOV_sway_loyalty = yes
+				}
+			}
+		}
+	}
+	
+	SOV_sway_leader_loyalty_mission = {
+
+		icon = generic_army_support
+
+		allowed = {
+			tag = SOV
+		}
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		fire_only_once = no
+
+		days_mission_timeout = 36
+
+		is_good = yes
+
+		cancel_if_not_visible = yes
+
+		activation = {
+			always = no
+		}
+
+		visible = {
+			tag = SOV
+			has_country_flag = active_purge
+		}
+	
+		timeout_effect = {
+			custom_effect_tooltip = SOV_sway_leader_loyalty_tt
+			hidden_effect = {
+				random_unit_leader = {
+					limit = {
+						has_trait = SOV_loyalty_unknown
+						has_unit_leader_flag = loyal
+						skill < 4
+					}
+					SOV_sway_loyalty = yes
+				}
+				
+				country_event = {
+					id = soviet_purge.7
+				}
+			}
+		}
+	}
+	
+	SOV_assist_oppositional_organizations = {
+
+		icon = generic_prepare_civil_war
+
+		cost = 10
+		
+		days_remove = 40
+		days_re_enable = 30
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+		
+		visible = {
+			always = no
+		}
+		
+		activation = {
+			always = no
+		}
+	
+		remove_effect = {
+			custom_effect_tooltip = SOV_coup_modifier_add_5_tt
+			add_to_variable = { SOV.coup_modifier = 5 }
+		}
+	}
+	
+	SOV_assist_oppositional_organizations_mission = {
+
+		icon = generic_prepare_civil_war
+
+		allowed = {
+			tag = SOV
+		}
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		fire_only_once = no
+
+		days_mission_timeout = 36
+
+		is_good = yes
+
+		cancel_if_not_visible = yes
+
+		activation = {
+			always = no
+		}
+
+		visible = {
+			tag = SOV
+			has_country_flag = active_purge
+		}
+	
+		timeout_effect = {
+			custom_effect_tooltip = SOV_coup_modifier_add_5_tt
+			add_to_variable = { SOV.coup_modifier = 5 }
+			SOV_recalc_coup_chance = yes
+			hidden_effect = {
+				country_event = { 
+					id = soviet_purge.7
+				}
+			}
+		}
+	}
+	
+	SOV_organize_the_international_mission = {
+
+		icon = eng_trade_unions_support
+
+		allowed = {
+			tag = SOV
+		}
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		fire_only_once = no
+
+		days_mission_timeout = 36
+
+		is_good = yes
+
+		cancel_if_not_visible = yes
+
+		activation = {
+			always = no
+		}
+
+		visible = {
+			tag = SOV
+			has_country_flag = active_purge
+		}
+	
+		timeout_effect = {
+			add_days_mission_timeout = {
+				mission = SOV_found_the_fourth_international
+				days = -30
+			}
+			hidden_effect = {
+				country_event = { 
+					id = soviet_purge.7
+				}
+			}
+		}
+	}
+}
+
+SOV_propaganda = {
+
+	SOV_chains_of_slavery = {
+		icon = generic_research
+
+		cost = 25
+		
+		ai_will_do = {
+			base = 1
+		}
+
+		days_remove = 120
+		days_re_enable = 180
+		
+		modifier = {
+			research_speed_factor = 0.1
+		}
+	
+		complete_effect = {
+			set_variable = { ROOT.frame = 2 }
+			ROOT_activate_propaganda = yes
+		}
+		
+		remove_effect = {
+			set_variable = { ROOT.frame = 2 }
+			ROOT_deactivate_propaganda = yes
+		}
+	}
+	
+	SOV_plan_of_great_deeds = {
+		icon = generic_construction
+
+		cost = 25
+		
+		ai_will_do = {
+			base = 1
+		}
+
+		days_remove = 120
+		days_re_enable = 180
+		
+		modifier = {
+			consumer_goods_factor = -0.05
+			production_speed_buildings_factor = 0.1
+			conversion_cost_civ_to_mil_factor = -0.2
+		}
+	
+		complete_effect = {
+			set_variable = { ROOT.frame = 3 }
+			ROOT_activate_propaganda = yes
+		}
+		
+		remove_effect = {
+			set_variable = { ROOT.frame = 3 }
+			ROOT_deactivate_propaganda = yes
+		}
+	}
+	
+}
+
+# DEBUG DECISIONS #
+SOV_debug_decisions = {
+	SOV_debug_call_high_command_event_on_leader = {
+
+		cost = 0
+		days_remove = 0
+		
+		visible = {
+			is_debug = yes
+		}
+
+		remove_effect = {
+			random_unit_leader = {	
+				limit = {
+					has_trait = SOV_loyalty_unknown
+					has_unit_leader_flag = disloyal
+				}
+				if = {
+					unit_leader_event = { id = soviet_purge.3 }
+				}
+			}
+		}
+	}
+	
+	SOV_debug_reveal_all = {
+
+		cost = 0
+		days_remove = 0
+		
+		visible = {
+			is_debug = yes
+		}
+
+		remove_effect = {
+			every_unit_leader = {	
+				SOV_reveal_unit_leader = yes
+			}
+		}
+	}
+	
+	SOV_debug_execute_random_leader = {
+
+		cost = 0
+		days_remove = 0
+		
+		visible = {
+			is_debug = yes
+		}
+
+		remove_effect = {
+			random_unit_leader = {	
+				SOV_execute_unit_leader = yes
+			}
+		}
+	}
+		
+	SOV_debug_send_random_leader_to_house_arrest = {
+
+		cost = 0
+		days_remove = 0
+		
+		visible = {
+			is_debug = yes
+		}
+
+		remove_effect = {
+			random_unit_leader = {	
+				SOV_send_unit_leader_to_house_arrest = yes
+			}
+		}
+	}
+	
+	SOV_debug_finish_the_purge = {
+
+		cost = 0
+		days_remove = 0
+		
+		visible = {
+			is_debug = yes
+		}
+
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = SOV_finish_the_purge
+				days = -10000
+			}
+		}
+	}
+	
+	SOV_debug_finish_the_international = {
+
+		cost = 0
+		days_remove = 0
+		
+		visible = {
+			is_debug = yes
+		}
+
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = SOV_found_the_fourth_international
+				days = -10000
+			}
+		}
+	}
+	
+	SOV_debug_trigger_coup = {
+
+		cost = 0
+		days_remove = 0
+		
+		visible = {
+			is_debug = yes
+		}
+
+		remove_effect = {
+			country_event = {
+				id = soviet_purge.8
+			}
+		}
+	}
 }

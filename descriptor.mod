@@ -7,4 +7,5 @@ tags={
 	"Events"
 }
 name="Soviet Union Rework [Base Game]"
-supported_version="1.9.0"
+supported_version="1.9.1"
+remote_file_id="2069482334"

@@ -1,0 +1,549 @@
+###########################
+# Soviet Purge Events
+###########################
+
+add_namespace = soviet_purge
+
+# Assassination hit an innocent commander...
+unit_leader_event = {
+	id = soviet_purge.1
+	title = soviet_purge.1.t
+	desc = soviet_purge.1.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = soviet_purge.1.a
+		ai_chance = { factor = 100 }
+		add_stability = -0.05
+	}
+	
+	option = {
+		name = soviet_purge.1.b
+		ai_chance = { factor = 0 }
+		add_political_power = -10
+	}
+}
+
+# Counter-Revolutionist was successfully assassinated!
+unit_leader_event = {
+	id = soviet_purge.2
+	title = soviet_purge.2.t
+	desc = soviet_purge.2.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = soviet_purge.2.a
+		ai_chance = { factor = 100 }
+		add_days_mission_timeout = {
+			mission = SOV_found_the_fourth_international
+			days = 45
+		}
+	}
+}
+
+# Disloyalty in the Highest Ranks!
+unit_leader_event = {
+	id = soviet_purge.3
+	title = soviet_purge.3.t
+	desc = soviet_purge.3.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = soviet_purge.3.a
+		ai_chance = { factor = 70 }
+		THIS = {
+			SOV_reveal_unit_leader = yes
+		}
+	}
+	
+	option = {
+		name = soviet_purge.3.b
+		ai_chance = { factor = 30 }
+		hidden_effect = {
+			THIS = {
+				random_list = {
+					40 = {
+						unit_leader_event = { 
+							id = soviet_purge.4
+							days = 60
+							random = 15
+						}
+					}
+					60 = {
+						unit_leader_event = { 
+							id = soviet_purge.5
+							days = 60
+							random = 15
+						}
+					}
+				}
+				set_nationality = SOT
+			}
+		}
+		effect_tooltip = {
+			THIS = {
+				custom_effect_tooltip = SOV_corrective_work_unit_leader_tt
+			}
+			random_list = {
+				40 = {
+					country_event = { 
+						id = soviet_purge.4
+					}
+				}
+				60 = {
+					country_event = { 
+						id = soviet_purge.5
+					}
+				}
+			}
+		}
+	}
+}
+
+# Corrective Work shows desired Effect!
+unit_leader_event = {
+	id = soviet_purge.4
+	title = soviet_purge.4.t
+	desc = soviet_purge.4.d
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			THIS = {
+				set_nationality = SOV
+				SOV_sway_loyalty = yes
+			}
+		}
+	}
+	
+	option = {
+		name = soviet_purge.4.a
+		ai_chance = { factor = 100 }
+		THIS = {
+			SOV_reveal_unit_leader = yes
+		}
+	}
+}
+
+# High Commander flees the Country!
+unit_leader_event = {
+	id = soviet_purge.5
+	title = soviet_purge.5.t
+	desc = soviet_purge.5.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = soviet_purge.5.a
+		ai_chance = { factor = 100 }
+		THIS = {
+			custom_effect_tooltip = SOV_unit_leader_flees_country_tt
+			SOV_remove_leader_trait = yes
+		}
+		add_to_variable = { SOV.coup_modifier = 5 }
+	}
+}
+
+# Hold a Public Trial
+country_event = {
+	id = soviet_purge.6
+	title = soviet_purge.6.t
+	desc = soviet_purge.6.d
+	
+	picture = GFX_report_event_soviet_purge_officers_01
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			random_unit_leader = {	
+				limit = {
+					has_trait = SOV_disloyal
+					NOT = {
+						has_unit_leader_flag = trial_event_target
+					}
+				}
+				set_unit_leader_flag = trial_event_target
+			}
+			random_unit_leader = {	
+				limit = {
+					has_trait = SOV_disloyal
+					NOT = {
+						has_unit_leader_flag = trial_event_target
+					}
+				}
+				set_unit_leader_flag = trial_event_target
+			}
+			random_unit_leader = {	
+				limit = {
+					has_trait = SOV_disloyal
+					NOT = {
+						has_unit_leader_flag = trial_event_target
+					}
+				}
+				set_unit_leader_flag = trial_event_target
+			}
+		}
+	}
+	
+	option = {
+		name = soviet_purge.6.a
+		ai_chance = { factor = 100 }
+		hidden_effect = {
+			set_temp_variable = { temp_house_arrest_days = SOV.trial_leader_count }
+			multiply_temp_variable = { temp_house_arrest_days = 25 }
+			every_unit_leader = {	
+				limit = {
+					has_unit_leader_flag = trial_event_target
+				}
+				SOV_send_unit_leader_to_house_arrest = yes
+				clr_unit_leader_flag = trial_event_target
+			}
+		}
+		effect_tooltip = {
+			every_unit_leader = {	
+				limit = {
+					has_unit_leader_flag = trial_event_target
+				}
+				custom_effect_tooltip = SOV_send_unit_leader_to_house_arrest_tt
+			}
+		}
+		add_days_mission_timeout = {
+			mission = SOV_found_the_fourth_international
+			days = temp_house_arrest_days
+		}
+	}
+	
+	option = {
+		name = soviet_purge.6.b
+		ai_chance = { factor = 100 }
+		hidden_effect = {
+			every_unit_leader = {	
+				limit = {
+					has_unit_leader_flag = trial_event_target
+				}
+				SOV_send_unit_leader_to_gulag = yes
+				clr_unit_leader_flag = trial_event_target
+			}
+		}
+		effect_tooltip = {
+			every_unit_leader = {
+				limit = {
+					has_unit_leader_flag = trial_event_target
+				}
+				custom_effect_tooltip = SOV_send_unit_leader_to_gulag_tt
+			}
+		}
+		set_temp_variable = { temp_gulag_days = SOV.trial_leader_count }
+		multiply_temp_variable = { temp_gulag_days = 35 }
+		add_days_mission_timeout = {
+			mission = SOV_found_the_fourth_international
+			days = temp_gulag_days
+		}
+	}
+	
+	option = {
+		name = soviet_purge.6.c
+		ai_chance = { factor = 100 }
+		hidden_effect = {
+			every_unit_leader = {	
+				limit = {
+					has_unit_leader_flag = trial_event_target
+				}
+				SOV_execute_unit_leader = yes
+				clr_unit_leader_flag = trial_event_target
+			}
+		}
+		effect_tooltip = {
+			every_unit_leader = {	
+				limit = {
+					has_unit_leader_flag = trial_event_target
+				}
+				custom_effect_tooltip = SOV_execute_unit_leader_tt
+			}
+		}
+		set_temp_variable = { temp_execute_days = SOV.trial_leader_count }
+		multiply_temp_variable = { temp_execute_days = 45 }
+		add_days_mission_timeout = {
+			mission = SOV_found_the_fourth_international
+			days = temp_execute_days
+		}
+	}
+}
+
+# Mission Generator for Trot
+country_event = {
+	id = soviet_purge.7
+
+	trigger = {
+		has_country_flag = active_purge
+	}
+	
+	is_triggered_only = yes
+
+	hidden = yes
+
+	immediate = {
+		random_list = {
+			45 = {
+				activate_mission = SOV_sway_leader_loyalty_mission
+			}
+			45 = {
+				activate_mission = SOV_assist_oppositional_organizations_mission
+			}
+			10 = {
+				modifier = {
+					factor = 0
+					has_global_flag = fourth_international_founded
+				}
+				activate_mission = SOV_organize_the_international_mission
+			}
+		}
+	}
+}
+
+# Trotsykist Coup
+country_event = {
+	id = soviet_purge.8
+	title = soviet_purge.8.t
+	desc = soviet_purge.8.d
+	picture = GFX_report_event_soviet_purge_politicians
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		tag = SOV
+	}
+	
+	mean_time_to_happen = {
+		days = 30
+	}
+	
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = soviet_purge.9
+				days = 10
+				random = 20
+			}
+		}
+	}
+
+	option = {
+		name = soviet_purge.8.a
+		kill_country_leader = yes
+		create_country_leader = {
+			name = "Leon Trotsky"
+			desc = "POLITICS_LEON_TROTSKY_DESC"
+			picture = "Portrait_Leon_Trotsky.dds"
+			expire = "1965.1.1"
+			ideology = leninism
+			traits = {
+				permanent_revolutionary
+			}
+		}
+	}
+}
+
+# Trotsky Dies
+country_event = {
+	id = soviet_purge.9
+	title = soviet_purge.9.t
+	desc = soviet_purge.9.d
+	picture = GFX_report_event_soviet_purge_politicians
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		tag = SOV
+	}
+	
+	mean_time_to_happen = {
+		days = 30
+	}
+	
+	immediate = {
+		hidden_effect = {
+			set_global_flag = soviet_crisis
+		}
+	}
+
+	option = {
+		name = soviet_purge.9.a
+		kill_country_leader = yes
+		create_country_leader = {
+			name = "Ivan Konev"
+			desc = "POLITICS_IVAN_KONEV_DESC"
+			picture = "Portrait_Soviet_Ivan_Konev.dds"
+			expire = "1965.1.1"
+			ideology = leninism
+			traits = {
+			}
+		}
+	}
+}
+
+# Purge Successful - No Coup
+country_event = {
+	id = soviet_purge.10
+	title = soviet_purge.10.t
+	desc = soviet_purge.10.d
+	picture = GFX_report_event_soviet_purge_politicians
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		tag = SOV
+	}
+	
+	mean_time_to_happen = {
+		days = 30
+	}
+	
+	immediate = {
+		hidden_effect = {
+			set_country_flag = successful_purge
+		}
+	}
+
+	option = {
+		name = soviet_purge.10.a
+		if = {
+			limit = {
+				check_variable = {
+					var = SOV.flag_disloyal
+					value = 0
+					compare = equals
+				}
+			}
+			add_ideas = SOV_purge_all_officers SOV_reveal_unit_leader
+			every_unit_leader = {	
+				limit = {
+					has_trait = SOV_loyalty_unknown	
+				}
+				SOV_reveal_unit_leader = yes	# Reveal all leaders after Purge
+			}
+			else = {
+				set_country_flag = disloyal_officers_in_army
+				add_dynamic_modifier = { modifier = SOV_purge_some_officers }
+				hidden_effect = {
+					if = {
+						limit = { 
+							has_global_flag = fourth_international_founded
+						}
+						country_event = {
+							id = soviet_purge.11
+							days = 180
+							random = 60
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+# Disloyal Commanders join the 4th International
+country_event = {
+	id = soviet_purge.11
+	title = soviet_purge.11.t
+	desc = soviet_purge.11.d
+	picture = GFX_report_event_soviet_purge_politicians
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			every_unit_leader = {	
+				limit = {
+					has_trait = SOV_loyalty_unknown
+				}
+				SOV_reveal_unit_leader = yes	# Reveal all leaders after Purge
+			}
+			every_unit_leader = {	
+				limit = {
+					has_unit_leader_flag = disloyal
+				}
+				set_nationality = SOT
+				SOV_remove_leader_trait = yes
+			}
+		}
+	}
+	
+	trigger = {
+		tag = SOV
+	}
+
+	option = {
+		name = soviet_purge.11.a
+		clr_country_flag = disloyal_officers_in_army
+		add_ideas = SOV_purge_all_officers
+	}
+}
+
+# Foundation of the 4th International
+news_event = {
+	id = soviet_purge.12
+	title = soviet_purge.12.t
+	picture = GFX_news_event_023
+	
+	desc = {
+		#During Purge
+		text = soviet_purge.12.d_1
+		trigger = {
+			SOV = {
+				has_country_flag = active_purge
+			}
+		}
+	}
+	
+	desc = {
+		#After Purge
+		text = soviet_purge.12.d_2
+		trigger = {
+			SOV = {
+				NOT = { has_country_flag = active_purge }
+			}
+		}
+	}
+	
+	immediate = {
+		hidden_effect = {
+			set_global_flag = fourth_international_founded
+			if = {
+				limit = {
+					SOV = {
+						NOT = {
+							has_country_flag = active_purge
+						}
+					}
+				}
+				SOV = {
+					country_event = {
+						id = soviet_purge.11
+						days = 30
+						random = 60
+					}
+				}
+			}
+		}
+	}
+	
+	major = yes
+	
+	is_triggered_only = yes
+
+	option = {
+		name = soviet_purge.12.a
+		trigger = { NOT = {	tag = SOV } }
+	}
+	
+	option = {
+		name = soviet_purge.12.b
+		trigger = { tag = SOV }
+	}
+}

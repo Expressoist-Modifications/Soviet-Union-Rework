@@ -4,15 +4,32 @@ spriteTypes = {
 		name = "GFX_trait_SOV_loyalty_unknown"
 		texturefile = "gfx/interface/traits/trait_SOV_loyalty_unknown.dds"
 	}
-	
+
 	spriteType = {
 		name = "GFX_trait_SOV_loyal"
 		texturefile = "gfx/interface/traits/trait_SOV_loyal.dds"
 	}
-	
+
 	spriteType = {
 		name = "GFX_trait_SOV_disloyal"
 		texturefile = "gfx/interface/traits/trait_SOV_disloyal.dds"
 	}
 	
+	#Technically no traits, but they fit here...
+	
+	spriteType = {
+		name = "GFX_trait_SOV_house_arrest"
+		texturefile = "gfx/interface/traits/trait_SOV_house_arrest.dds"
+	}
+	
+	spriteType = {
+		name = "GFX_trait_SOV_gulag"
+		texturefile = "gfx/interface/traits/trait_SOV_gulag.dds"
+	}
+	
+	spriteType = {
+		name = "GFX_trait_SOV_execute"
+		texturefile = "gfx/interface/traits/trait_SOV_execute.dds"
+	}
+
 }

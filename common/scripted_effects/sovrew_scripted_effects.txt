@@ -1,0 +1,226 @@
+ROOT_activate_propaganda = {
+	if = {
+		limit = {
+			NOT = { has_country_flag = slot_1_active }
+		}
+		set_country_flag = slot_1_active
+		set_variable = { ROOT.slot_1_frame = ROOT.frame }
+		
+		else_if = {
+			limit = {
+				NOT = { has_country_flag = slot_2_active }
+			}
+			set_country_flag = slot_2_active
+			set_variable = { ROOT.slot_2_frame = ROOT.frame }
+			
+			else_if = {
+				limit = {
+					NOT = { has_country_flag = slot_3_active }
+				}
+				set_country_flag = slot_3_active
+				set_variable = { ROOT.slot_3_frame = ROOT.frame }
+			}
+		}
+	}
+}
+
+ROOT_deactivate_propaganda = {
+	if = {
+		limit = {
+			AND = {
+				has_country_flag = slot_1_active
+				check_variable = { ROOT.slot_1_frame = ROOT.frame }
+			}
+		}
+		clr_country_flag = slot_1_active
+		set_variable  = { ROOT.slot_1_frame = 1}
+		
+		else_if = {
+			limit = {
+				AND = {
+					has_country_flag = slot_2_active
+					check_variable = { ROOT.slot_2_frame = ROOT.frame }
+				}
+			}
+			clr_country_flag = slot_2_active
+			set_variable  = { ROOT.slot_2_frame = 1}
+		
+			else_if = {
+				limit = {
+					AND = {
+						has_country_flag = slot_3_active
+						check_variable = { ROOT.slot_3_frame = ROOT.frame }
+					}
+				}
+				clr_country_flag = slot_3_active
+				set_variable  = { ROOT.slot_3_frame = 0}
+			}
+		}
+	}
+}
+
+
+SOV_reveal_unit_leader = {
+	if {
+		limit = {
+			has_unit_leader_flag = loyal
+		}
+		add_unit_leader_trait = SOV_loyal
+		add_to_variable = { SOV.loyal_count = 1 }
+	}
+	if {
+		limit = {
+			has_unit_leader_flag = disloyal
+		}
+		add_unit_leader_trait = SOV_disloyal
+		add_to_variable = { SOV.disloyal_count = 1 }
+		SOV_update_trial_cost = yes
+	}
+	remove_unit_leader_trait = SOV_loyalty_unknown
+	subtract_from_variable = { SOV.unknown_count = 1 }
+}
+
+SOV_update_trial_cost = {	
+	if = {
+		limit = {
+			check_variable = {
+				var = SOV.disloyal_count
+				value = 3
+				compare = less_than_or_equals
+			}
+		}
+		set_variable = { SOV.trial_leader_count = SOV.disloyal_count }
+		else = {
+			set_variable = { SOV.trial_leader_count = 3 }
+		}
+	}
+	
+	set_variable = { SOV.trial_cost = 5 }
+	multiply_variable = { SOV.trial_cost = SOV.trial_leader_count }
+}
+
+SOV_sway_loyalty = {
+	if {
+		limit = {
+			has_unit_leader_flag = loyal
+		}
+		clr_unit_leader_flag = loyal
+		set_unit_leader_flag = disloyal
+		
+		subtract_from_variable = { SOV.flag_loyal = 1 }
+		add_to_variable = { SOV.flag_disloyal = 1 }
+		
+		else_if = {
+			limit = {
+				has_unit_leader_flag = disloyal
+			}
+			clr_unit_leader_flag = disloyal
+			set_unit_leader_flag = loyal
+			
+			add_to_variable = { SOV.flag_loyal = 1 }
+			subtract_from_variable = { SOV.flag_disloyal = 1 }
+		}
+	}
+	
+	SOV_recalc_coup_chance = yes
+}
+
+SOV_execute_unit_leader = {
+	add_to_variable = { SOV.execute_count = 1 }
+	retire = yes
+	SOV_remove_leader_trait = yes
+	
+	subtract_from_variable = { SOV.execute_pp_modifier = 0.05 }
+	add_to_variable = { SOV.execute_stability_modifier = 0.006 }
+	SOV_recalc_purge_modifier = yes
+}
+
+SOV_send_unit_leader_to_gulag = {
+	set_unit_leader_flag = SOV_sent_to_gulag
+	add_to_variable = { SOV.gulag_count = 1 }
+	set_nationality = SOT
+	SOV_remove_leader_trait = yes
+	
+	add_to_variable = { SOV.gulag_stability_modifier = 0.006 }
+	SOV_recalc_purge_modifier = yes
+}
+
+SOV_send_unit_leader_to_house_arrest = {
+	add_to_variable = { SOV.house_arrest_count = 1 }
+	set_nationality = SOT
+	SOV_remove_leader_trait = yes
+	
+	add_to_variable = { SOV.house_arrest_pp_modifier = 0.05 }
+	add_to_variable = { SOV.house_arrest_stability_modifier = 0.006 } # Amount in %
+	SOV_recalc_purge_modifier = yes
+}
+
+SOV_remove_leader_trait = {
+	if {
+		limit = {
+			has_trait = SOV_disloyal
+		}
+		subtract_from_variable = { SOV.disloyal_count = 1 }
+		remove_unit_leader_trait = SOV_disloyal
+		SOV_update_trial_cost = yes
+	}
+	if {
+		limit = {
+			has_trait = SOV_loyal
+		}
+		subtract_from_variable = { SOV.loyal_count = 1 }
+		remove_unit_leader_trait = SOV_loyal
+	}
+	if {
+		limit = {
+			has_trait = SOV_loyalty_unknown
+		}
+		subtract_from_variable = { SOV.unknown_count = 1 }
+		remove_unit_leader_trait = SOV_loyalty_unknown
+	}
+	
+	if {
+		limit = {
+			has_unit_leader_flag = loyal
+		}
+		subtract_from_variable = { SOV.flag_loyal = 1 }
+	}
+	if {
+		limit = {
+			has_unit_leader_flag = disloyal
+		}
+		subtract_from_variable = { SOV.flag_disloyal = 1 }
+	}
+	
+	SOV_recalc_coup_chance = yes
+}
+
+SOV_recalc_coup_chance = {
+
+	# Coup Chance: ( 100 / Leaders ) * Disloyal
+
+	set_temp_variable = { temp_max = SOV.num_leaders }
+	
+	set_temp_variable = { temp_perc = 100 }
+	divide_temp_variable = { temp_perc = temp_max }
+	multiply_temp_variable = { temp_perc = SOV.flag_disloyal }
+	
+	# Additional Modifier
+	
+	add_to_temp_variable = { temp_perc = SOV.coup_modifier }
+	set_variable = { SOV.coup_chance = temp_perc }
+	round_variable = SOV.coup_chance
+	
+	set_variable = { SOV.no_coup_chance = 100 }
+	subtract_from_variable = { SOV.no_coup_chance = SOV.coup_chance}
+}
+
+SOV_recalc_purge_modifier = {
+	set_variable = { SOV.purge_pp_modifier = SOV.execute_pp_modifier }
+	add_to_variable = { SOV.purge_pp_modifier = SOV.house_arrest_pp_modifier }
+	
+	set_variable = { SOV.purge_stability_modifier = -0.2 } #Default
+	add_to_variable = { SOV.purge_stability_modifier = SOV.execute_stability_modifier }
+	add_to_variable = { SOV.purge_stability_modifier = SOV.house_arrest_stability_modifier }
+	add_to_variable = { SOV.purge_stability_modifier = SOV.gulag_stability_modifier }
+}

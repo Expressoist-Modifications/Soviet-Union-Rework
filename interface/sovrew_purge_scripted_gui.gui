@@ -1,0 +1,226 @@
+guiTypes = {
+
+	containerWindowType = {
+		name = "sov_purge_ui_window"
+		position = { x = 0 y = 0 }
+		size = { width = 100% height= 40 }
+		
+		
+		containerWindowType = {
+			name = "execute_container"
+			position = { x= 10	 y = 15 }
+			size = { width = 50 height= 16 }
+		
+			iconType = {
+				name ="execute_ico"
+				spriteType = "GFX_trait_SOV_execute"
+				position = { x= 20	 y = -7 }
+				alwaystransparent = yes
+			}
+				
+			instantTextBoxType = {
+				name ="execute_txt"
+				position = { x= 0	 y = 0 }
+				font = "hoi_18mbs"
+				text = "[?SOV.execute_count]"
+				format = center
+				maxWidth = 20
+				maxHeight = 16
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+			
+			instantTextBoxType = {
+				name ="assassinate_tt"
+				position = { x= 0	 y = 0 }
+				pdx_tooltip = "SOV_decision_execute"
+				pdx_tooltip_delayed = "SOV_decision_execute_desc"
+				font = "hoi_18mbs"
+				text = ""
+				maxWidth = 50
+				maxHeight = 16
+			}
+		}
+		
+		containerWindowType = {
+			name = "gulag_container"
+			position = { x= 70	 y = 15 }
+			size = { width = 50 height= 16 }
+		
+			iconType = {
+				name ="gulag_ico"
+				spriteType = "GFX_trait_SOV_gulag"
+				position = { x= 20	 y = -7 }
+				alwaystransparent = yes
+			}
+				
+			instantTextBoxType = {
+				name ="gulag_txt"
+				position = { x= 0	 y = 0 }
+				font = "hoi_18mbs"
+				text = "[?SOV.gulag_count]"
+				format = center
+				maxWidth = 20
+				maxHeight = 16
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+			
+			instantTextBoxType = {
+				name ="gulag_tt"
+				position = { x= 0	 y = 0 }
+				pdx_tooltip = "SOV_decision_gulag"
+				pdx_tooltip_delayed = "SOV_decision_gulag_desc"
+				font = "hoi_18mbs"
+				text = ""
+				maxWidth = 50
+				maxHeight = 16
+			}
+		}
+		
+		containerWindowType = {
+			name = "house_arrest_container"
+			position = { x= 130	 y = 15 }
+			size = { width = 50 height= 16 }
+		
+			iconType = {
+				name ="house_arrest_ico"
+				spriteType = "GFX_trait_SOV_house_arrest"
+				position = { x= 20	 y = -7 }
+				alwaystransparent = yes
+			}
+				
+			instantTextBoxType = {
+				name ="house_arrest_txt"
+				position = { x= 0	 y = 0 }
+				font = "hoi_18mbs"
+				text = "[?SOV.house_arrest_count]"
+				format = center
+				maxWidth = 20
+				maxHeight = 16
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+			
+			instantTextBoxType = {
+				name ="house_arrest_tt"
+				position = { x= 0	 y = 0 }
+				pdx_tooltip = "SOV_decision_house_arrest"
+				pdx_tooltip_delayed = "SOV_decision_house_arrest_desc"
+				font = "hoi_18mbs"
+				text = ""
+				maxWidth = 50
+				maxHeight = 16
+			}
+		}
+		
+		
+		containerWindowType = {
+			name = "disloyal_container"
+			position = { x= 330	 y = 15 }
+			size = { width = 50 height= 16 }
+		
+			iconType = {
+				name ="disloyal_ico"
+				spriteType = "GFX_trait_SOV_disloyal"
+				position = { x= 20	 y = -7 }
+				alwaystransparent = yes
+			}
+				
+			instantTextBoxType = {
+				name ="disloyal_txt"
+				position = { x= 0	 y = 0 }
+				font = "hoi_18mbs"
+				text = "[?SOV.disloyal_count]"
+				format = center
+				maxWidth = 20
+				maxHeight = 16
+				fixedsize = yes
+			}
+			
+			instantTextBoxType = {
+				name ="unknown_tt"
+				position = { x= 0	 y = 0 }
+				pdx_tooltip = "SOV_decision_disloyal"
+				pdx_tooltip_delayed = "SOV_decision_disloyal_desc"
+				font = "hoi_18mbs"
+				text = ""
+				maxWidth = 50
+				maxHeight = 16
+			}
+		}
+		
+		containerWindowType = {
+			name = "loyal_container"
+			position = { x= 390	 y = 15 }
+			size = { width = 50 height= 16 }
+		
+			iconType = {
+				name ="loyal_ico"
+				spriteType = "GFX_trait_SOV_loyal"
+				position = { x= 20	 y = -7 }
+				alwaystransparent = yes
+			}
+				
+			instantTextBoxType = {
+				name ="loyal_txt"
+				position = { x= 0	 y = 0 }
+				font = "hoi_18mbs"
+				text = "[?SOV.loyal_count]"
+				format = center
+				maxWidth = 20
+				maxHeight = 16
+				fixedsize = yes
+			}
+			
+			instantTextBoxType = {
+				name ="unknown_tt"
+				position = { x= 0	 y = 0 }
+				pdx_tooltip = "SOV_decision_loyal"
+				pdx_tooltip_delayed = "SOV_decision_loyal_desc"
+				font = "hoi_18mbs"
+				text = ""
+				maxWidth = 50
+				maxHeight = 16
+			}
+		}
+		
+		containerWindowType = {
+			name = "unknown_container"
+			position = { x= 450	 y = 15 }
+			size = { width = 50 height= 16 }
+		
+			iconType = {
+				name ="unknown_ico"
+				spriteType = "GFX_trait_SOV_loyalty_unknown"
+				position = { x= 20	 y = -7 }
+				alwaystransparent = yes
+			}
+				
+			instantTextBoxType = {
+				name ="unknown_txt"
+				position = { x= 0	 y = 0 }
+				font = "hoi_18mbs"
+				text = "[?SOV.unknown_count]"
+				format = center
+				maxWidth = 20
+				maxHeight = 16
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+			
+			instantTextBoxType = {
+				name ="unknown_tt"
+				position = { x= 0	 y = 0 }
+				pdx_tooltip = "SOV_decision_loyalty_unknown"
+				pdx_tooltip_delayed = "SOV_decision_loyalty_unknown_desc"
+				font = "hoi_18mbs"
+				text = ""
+				maxWidth = 50
+				maxHeight = 16
+			}
+		}
+		
+	}
+	
+}

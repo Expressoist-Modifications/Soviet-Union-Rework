@@ -1,0 +1,12 @@
+spriteTypes = {	
+
+	spriteType = {
+		name = "GFX_cat_SOV_greate_purge"
+		texturefile = "gfx/interface/decisions/decision_cat_sov_greate_purge.dds"
+	}
+	
+	spriteType = {
+		name = "GFX_cat_SOV_trotskyite_plot"
+		texturefile = "gfx/interface/decisions/decision_cat_sov_trotskyite_plot.dds"
+	}
+}

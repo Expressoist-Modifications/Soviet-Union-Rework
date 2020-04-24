@@ -1,0 +1,4 @@
+SOT = {
+	original_tag = SOV
+	has_country_flag = SOV_soviet_trotsky_flag
+}

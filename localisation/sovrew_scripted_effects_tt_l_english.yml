@@ -1,0 +1,8 @@
+﻿l_english:
+ SOV_execute_unit_leader_tt:0 "Will be §YExecuted§!"
+ SOV_send_unit_leader_to_gulag_tt:0 "Will be sent to §YGulag§!"
+ SOV_send_unit_leader_to_house_arrest_tt:0 "Will be sent to §YHouse Arrest§!"
+ SOV_corrective_work_unit_leader_tt:0 "Will be sent to §YCorrective Work§! for §Y60 Days§!."
+ SOV_unit_leader_flees_country_tt:0 "§RFlees§! the Soviet Union which will increase the Coup Chance by §R5%§!."
+ SOV_coup_modifier_add_5_tt:0 "Modify the Coup Chance by §R+5%§!."
+ SOV_coup_modifier_add_20_tt:0 "Modify the Coup Chance by §R+20%§!."

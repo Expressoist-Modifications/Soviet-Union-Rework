@@ -1,14 +1,80 @@
-SOV_the_great_purge = {
+SOV_propaganda = {
+	
+	icon = generic_propaganda
 	
 	allowed = {
 		original_tag = SOV
 	}
-
+	
 	available = {
-		always = yes
+		custom_trigger_tooltip = {
+			tooltip = propaganda_available_tt		
+			NOT = {
+				AND = {
+					has_country_flag = slot_1_active
+					has_country_flag = slot_2_active
+					has_country_flag = slot_3_active
+				}
+			}
+		}
 	}
 
 	visible = {
 		always = yes
 	}
+
+	scripted_gui = sov_propaganda_ui
+
+	priority = 85
+}
+
+SOV_decision_great_purge = {
+
+	icon = power_struggle
+	
+	picture = GFX_cat_SOV_greate_purge
+	
+	allowed = {
+		original_tag = SOV
+	}
+
+	visible = {
+		has_country_flag = active_purge
+	}
+	
+	scripted_gui = sov_purge_ui
+	
+	priority = 84
+}
+
+SOV_decision_trotskyite_plot = {
+
+	icon = power_struggle
+	
+	picture = GFX_cat_SOV_trotskyite_plot
+	
+	allowed = {
+		original_tag = SOV
+	}
+
+	visible = {
+		OR = {
+			has_country_flag = active_purge
+			NOT = { has_global_flag = fourth_international_founded }
+		}
+	}
+	
+	priority = 83
+}
+
+# DEBUG DECISIONS #
+SOV_debug_decisions = {
+	
+	visible = {
+		is_debug = yes
+	}
+	
+	visible_when_empty = yes
+
+	priority = 50
 }

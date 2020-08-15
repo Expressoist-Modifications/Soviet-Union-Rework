@@ -1,0 +1,160 @@
+guiTypes = {
+
+	containerWindowType = {
+		name = "sov_sfyp_ui_window"
+		position = { x = 0 y = 0 }
+		size = { width = 100% height= 200 }
+		
+		containerWindowType = {
+			name = "header_container"
+			position = { x= 10	 y = 20 }
+			size = { width = 490 height= 16 }
+			
+			containerWindowType = {
+				name = "stars_container"
+				position = { x= 220	 y = 0 }
+				size = { width = 100 height= 16 }
+				
+				iconType = {
+					name ="star_ico_1"
+					spriteType = "GFX_air_experience"
+					position = { x= 0	 y = 5 }
+					alwaystransparent = yes
+				}
+				
+				iconType = {
+					name ="star_ico_2"
+					spriteType = "GFX_air_experience"
+					position = { x= 20	 y = 0 }
+					alwaystransparent = yes
+				}
+				
+				iconType = {
+					name ="star_ico_3"
+					spriteType = "GFX_air_experience"
+					position = { x= 40	 y = 5 }
+					alwaystransparent = yes
+				}
+			}
+			
+			instantTextBoxType = {
+				name ="goals_text"
+				position = { x= 0	 y = 20 }
+				font = "hoi_24header"
+				text = "SOV_sfyp_goals"
+				format = center
+				maxWidth = 490
+				maxHeight = 16
+				fixedsize = yes
+			}
+		}
+		
+		
+		containerWindowType = {
+			name = "construction_container"
+			position = { x= 10	 y = 80 }
+			size = { width = 250 height= 16 }
+		
+			iconType = {
+				name ="construction_ico"
+				spriteType = "GFX_trigger_no"
+				position = { x= 0	 y = 2 }
+				alwaystransparent = yes
+			}
+				
+			instantTextBoxType = {
+				name ="construction_txt"
+				position = { x= 25	 y = 0 }
+				font = "hoi_18mbs"
+				text = "SOV_sfyp_construction"
+				format = left
+				maxWidth = 220
+				maxHeight = 16
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+			
+			instantTextBoxType = {
+				name ="construction_tt"
+				position = { x= 0	 y = 0 }
+				pdx_tooltip = "SOV_sfyp_construction_tt"
+				font = "hoi_18mbs"
+				text = ""
+				maxWidth = 240
+				maxHeight = 16
+			}
+		}
+		
+		containerWindowType = {
+			name = "clergy_container"
+			position = { x= 10	 y = 100 }
+			size = { width = 250 height= 16 }
+		
+			iconType = {
+				name ="clergy_ico"
+				spriteType = "GFX_trigger_no"
+				position = { x= 0	 y = 2 }
+				alwaystransparent = yes
+			}
+				
+			instantTextBoxType = {
+				name ="clergy_txt"
+				position = { x= 25	 y = 0 }
+				font = "hoi_18mbs"
+				text = "SOV_sfyp_clergy"
+				format = left
+				maxWidth = 240
+				maxHeight = 16
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+			
+			instantTextBoxType = {
+				name ="clergy_tt"
+				position = { x= 0	 y = 0 }
+				pdx_tooltip = "SOV_sfyp_clergy_tt"
+				font = "hoi_18mbs"
+				text = ""
+				maxWidth = 250
+				maxHeight = 16
+			}
+		}
+		
+		containerWindowType = {
+			name = "resource_container"
+			position = { x= 255	 y = 80 }
+			size = { width = 250 height= 16 }
+		
+			iconType = {
+				name ="resource_ico"
+				spriteType = "GFX_trigger_no"
+				position = { x= 0	 y = 2 }
+				alwaystransparent = yes
+			}
+				
+			instantTextBoxType = {
+				name ="resource_txt"
+				position = { x= 25	 y = 0 }
+				font = "hoi_18mbs"
+				text = "SOV_sfyp_resource"
+				format = left
+				maxWidth = 220
+				maxHeight = 16
+				fixedsize = yes
+				alwaystransparent = yes
+			}
+			
+			instantTextBoxType = {
+				name ="resource_tt"
+				position = { x= 0	 y = 0 }
+				pdx_tooltip = "SOV_sfyp_resource_tt"
+				font = "hoi_18mbs"
+				text = ""
+				maxWidth = 250
+				maxHeight = 16
+			}
+		}
+		
+	}
+	
+}

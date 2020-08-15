@@ -1,9 +1,0 @@
-spriteTypes = {
-	
-	spriteType = {
-		name = "GFX_SOV_prop_tileset"
-		texturefile = "gfx/interface/propaganda/SOV_prop_tileset.dds"
-		noOfFrames = 3
-	}
-	
-}

@@ -15,7 +15,7 @@ spriteTypes = {
 		texturefile = "gfx/interface/traits/trait_SOV_disloyal.dds"
 	}
 	
-	#Technically no traits, but they fit here...
+	# Not used in the game - only for the Scripted GUI
 	
 	spriteType = {
 		name = "GFX_trait_SOV_house_arrest"

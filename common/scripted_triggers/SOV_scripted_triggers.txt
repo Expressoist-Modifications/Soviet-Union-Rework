@@ -1,0 +1,6 @@
+SOV_sfyp_has_construction_goal = {
+	AND = {
+		industrial_complex > 50
+		has_tech = construction1
+	}
+}

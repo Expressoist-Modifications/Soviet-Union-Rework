@@ -1,0 +1,15 @@
+scripted_gui = {
+
+	sov_sfyp_ui = {
+		context_type = decision_category
+		window_name = "sov_sfyp_ui_window"
+		
+		properties = {
+			construction_ico = {
+				image = "[sfyp_construction_ico]"
+			}
+		}
+	}
+	
+}
+

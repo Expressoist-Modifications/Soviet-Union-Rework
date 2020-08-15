@@ -54,12 +54,14 @@ ideas = {
 				stability_factor = 0.05
 			}
 		}
-
+		
 		officers_purged = {
 			removal_cost = -1
+
+			picture = officers_purged
 			
 			allowed = {
-				always = no # Added via focus
+				always = no 
 			}
 
 			allowed_civil_war = {
@@ -67,16 +69,16 @@ ideas = {
 			}
 			
 			research_bonus = {
-				land_doctrine = -0.10
-				naval_doctrine = -0.10
-				air_doctrine = -0.10
+				land_doctrine = -0.05
+				naval_doctrine = -0.05
+				air_doctrine = -0.05
 			}
 
 			modifier = {
-				army_org_factor = -0.5
-				send_volunteer_factor = -0.8
-				industrial_capacity_factory = -0.2
-				training_time_factor = 0.5
+				army_org_factor = -0.25
+				send_volunteer_factor = -0.5
+				industrial_capacity_factory = -0.10
+				training_time_factor = 0.25
 			}
 		}
 		

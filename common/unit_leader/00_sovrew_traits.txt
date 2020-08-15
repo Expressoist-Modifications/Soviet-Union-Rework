@@ -1,4 +1,3 @@
-
 # SOV LOYALITY TRAITS
 
 leader_traits = {
@@ -23,16 +22,6 @@ leader_traits = {
 	}
 	
 	SOV_disloyal = {
-
-		type = all
-		trait_type = personality_trait
-
-		new_commander_weight = {
-			factor = 0
-		}
-	}
-
-	SOV_corrective_work = {
 
 		type = all
 		trait_type = personality_trait

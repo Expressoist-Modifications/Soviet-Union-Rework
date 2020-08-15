@@ -1,9 +1,14 @@
+# SFYP CONSTRUCTION GOAL
 defined_text = {
-	name = active_prop_tileset
+	name = sfyp_construction_ico
 	text = {
 		trigger = {
-			original_tag = SOV
+			SOV_sfyp_has_construction_goal = yes
 		}
-		localization_key = "GFX_SOV_prop_tileset"
+		localization_key = "GFX_trigger_yes"
+	}
+	
+	text = {
+		localization_key = "GFX_trigger_no"
 	}
 }

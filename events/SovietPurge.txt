@@ -187,6 +187,14 @@ country_event = {
 				}
 				set_unit_leader_flag = trial_event_target
 			}
+			
+			# ADD DAYS TO MISSION VARIABLES - Temp variables don't work for some reason...
+			set_variable = { SOV.house_arrest_days = SOV.trial_leader_count }
+			multiply_variable = { SOV.house_arrest_days = 25 }
+			set_variable = { SOV.gulag_days = SOV.trial_leader_count }
+			multiply_variable = { SOV.gulag_days = 35 }
+			set_variable = { SOV.execute_days = SOV.trial_leader_count }
+			multiply_variable = { SOV.execute_days = 45 }
 		}
 	}
 	
@@ -194,8 +202,6 @@ country_event = {
 		name = soviet_purge.6.a
 		ai_chance = { factor = 100 }
 		hidden_effect = {
-			set_temp_variable = { temp_house_arrest_days = SOV.trial_leader_count }
-			multiply_temp_variable = { temp_house_arrest_days = 25 }
 			every_unit_leader = {	
 				limit = {
 					has_unit_leader_flag = trial_event_target
@@ -214,7 +220,7 @@ country_event = {
 		}
 		add_days_mission_timeout = {
 			mission = SOV_found_the_fourth_international
-			days = temp_house_arrest_days
+			days = SOV.house_arrest_days
 		}
 	}
 	
@@ -238,11 +244,9 @@ country_event = {
 				custom_effect_tooltip = SOV_send_unit_leader_to_gulag_tt
 			}
 		}
-		set_temp_variable = { temp_gulag_days = SOV.trial_leader_count }
-		multiply_temp_variable = { temp_gulag_days = 35 }
 		add_days_mission_timeout = {
 			mission = SOV_found_the_fourth_international
-			days = temp_gulag_days
+			days = SOV.gulag_days
 		}
 	}
 	
@@ -266,11 +270,9 @@ country_event = {
 				custom_effect_tooltip = SOV_execute_unit_leader_tt
 			}
 		}
-		set_temp_variable = { temp_execute_days = SOV.trial_leader_count }
-		multiply_temp_variable = { temp_execute_days = 45 }
 		add_days_mission_timeout = {
 			mission = SOV_found_the_fourth_international
-			days = temp_execute_days
+			days = SOV.execute_days
 		}
 	}
 }
@@ -444,6 +446,10 @@ country_event = {
 				}
 			}
 		}
+		add_timed_idea = {
+			idea = officers_purged
+			days = 1080
+		}
 	}
 }
 
@@ -539,7 +545,7 @@ news_event = {
 
 	option = {
 		name = soviet_purge.12.a
-		trigger = { NOT = {	tag = SOV } }
+		trigger = { NOT = { tag = SOV } }
 	}
 	
 	option = {

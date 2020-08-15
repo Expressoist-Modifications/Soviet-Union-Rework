@@ -478,66 +478,6 @@ SOV_decision_trotskyite_plot = {
 	}
 }
 
-SOV_propaganda = {
-
-	SOV_chains_of_slavery = {
-		icon = generic_research
-
-		cost = 25
-		
-		ai_will_do = {
-			base = 1
-		}
-
-		days_remove = 120
-		days_re_enable = 180
-		
-		modifier = {
-			research_speed_factor = 0.1
-		}
-	
-		complete_effect = {
-			set_variable = { ROOT.frame = 2 }
-			ROOT_activate_propaganda = yes
-		}
-		
-		remove_effect = {
-			set_variable = { ROOT.frame = 2 }
-			ROOT_deactivate_propaganda = yes
-		}
-	}
-	
-	SOV_plan_of_great_deeds = {
-		icon = generic_construction
-
-		cost = 25
-		
-		ai_will_do = {
-			base = 1
-		}
-
-		days_remove = 120
-		days_re_enable = 180
-		
-		modifier = {
-			consumer_goods_factor = -0.05
-			production_speed_buildings_factor = 0.1
-			conversion_cost_civ_to_mil_factor = -0.2
-		}
-	
-		complete_effect = {
-			set_variable = { ROOT.frame = 3 }
-			ROOT_activate_propaganda = yes
-		}
-		
-		remove_effect = {
-			set_variable = { ROOT.frame = 3 }
-			ROOT_deactivate_propaganda = yes
-		}
-	}
-	
-}
-
 # DEBUG DECISIONS #
 SOV_debug_decisions = {
 	SOV_debug_call_high_command_event_on_leader = {
@@ -657,6 +597,23 @@ SOV_debug_decisions = {
 			country_event = {
 				id = soviet_purge.8
 			}
+		}
+	}
+	
+	SOV_debug_check_trigger = {
+
+		cost = 0
+		days_remove = 0
+		
+		visible = {
+			is_debug = yes
+		}
+		
+		available = {
+			SOV_sfyp_has_construction_goal = yes
+		}
+
+		remove_effect = {
 		}
 	}
 }
